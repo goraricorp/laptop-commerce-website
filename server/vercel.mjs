@@ -1,11 +1,6 @@
 export const config = {
-  installCommand: "bun install",
+  framework: "express",
+  installCommand: "npx --yes bun@1.4.3 install --frozen-lockfile",
   buildCommand: "bun run build",
-  outputDirectory: "dist",
-  "functions": {
-    "api/index.js": { "maxDuration": 60, "includeFiles": "dist/**" }
-  },
-  rewrites: [
-    { source: "/(.*)", destination: "/api/index" }
-  ]
+  functions: { "src/index.js": { maxDuration: 60 } },
 }

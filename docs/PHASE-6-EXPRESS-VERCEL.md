@@ -44,15 +44,15 @@ Có thể chạy trực tiếp `bun run dev` trong từng thư mục client/serv
 | Thiết lập | Frontend | Backend |
 | --- | --- | --- |
 | Root Directory | `client` | `server` |
-| Framework | Vite | Other/Node Functions (`framework:null`) |
+| Framework | Vite | Express (`framework:"express"`) |
 | Runtime | static SPA | Node 24.x |
-| Install | config dùng Deno 2.9.7 frozen install từ workspace root | tương tự |
-| Build | `deno task build` trong client | `deno task build` trong server, Vite SSR target node24 |
-| Entrypoint | dist/index.html | `api/index.js` → `../dist/index.js` do Vite tạo |
-| Routing | SPA fallback; API origin cấu hình qua `VITE_PUBLIC_SERVER_URL` | rewrite mọi path về API function, Express nhận endpoint như `/auth`, `/product`, `/cart` |
-| Function | — | includeFiles `dist/**`, maxDuration 60 giây |
+| Install | `bun install --frozen-lockfile` | `npx --yes bun@1.4.3 install --frozen-lockfile` |
+| Build | `bun run build` trong client | `bun run build` trong server, Vite SSR target node24 |
+| Entrypoint | dist/index.html | `src/index.js` export Express app cho Vercel Express preset |
+| Routing | SPA fallback; API origin cấu hình qua `VITE_PUBLIC_SERVER_URL` | Express nhận nguyên path như `/health`, `/auth`, `/product`, `/cart` |
+| Function | — | `src/index.js`, maxDuration 60 giây |
 
-Đây là một [Node Vercel Function](https://vercel.com/docs/functions/runtimes/node-js) phục vụ Express và sử dụng đúng artifact Vite; không để Vercel xây thêm một app Hono hoặc chỉ build Vite rồi bỏ qua artifact. `server/src/index.js` chỉ export app; `api/index.js` nạp output. `deno task --cwd server test:built` đã thực sự chạy đường import này với Node 24 và HTTP localhost.
+Vercel dùng preset Express để đưa `server/src/index.js` thành một Function duy nhất, giữ nguyên URL route Express. Vite build vẫn chạy để kiểm tra artifact server trong pipeline. `bun run test:built` smoke-test Express app trực tiếp bằng Node. Khóa Bun dùng định dạng v2 nên lệnh cài đặt phải chạy Bun 1.4.3; Bun 1.3.x sẽ bỏ qua lockfile này.
 
 Frontend cấu hình `VITE_PUBLIC_SERVER_URL` thành origin HTTPS của project backend. Client gọi trực tiếp server; `client/vercel.mjs` chỉ cấu hình SPA fallback. Domain hiện định cấu hình là `https://example-client.vercel.app` và `https://example-server.vercel.app`; đặt cả `VITE_PUBLIC_CLIENT_URL` và `VITE_PUBLIC_SERVER_URL` trong env của cả hai project. Đây là hai site khác nhau: cookie `SameSite=None; Secure` cho phép credentialed requests ở trình duyệt chấp nhận third-party cookies, nhưng Safari ITP và chính sách chặn third-party cookie có thể vẫn ngăn auth. Hỗ trợ đầy đủ các trình duyệt đó cần hai custom domain cùng site. [Vercel hỗ trợ cấu hình programmatic `.mjs`](https://vercel.com/docs/project-configuration/vercel-ts). Cho hai project truy cập workspace files bên ngoài Root Directory để đọc root deno.lock/node_modules. Không đổi root outputDirectory backend thành frontend dist.
 
@@ -104,7 +104,7 @@ Rollback ưu tiên deployment tương thích, giữ bảng/dữ liệu mới; t�
 | Browser | **6 suites PASS trước lần đổi API origin**; fixture đã chuyển sang server origin nhưng cần chạy lại để xác nhận CORS/cookie và các luồng browser |
 | Lint | **0 errors, 0 warnings** client và server; không thêm rule suppression |
 | Build | Vite client và Vite SSR server PASS; server có cảnh báo dynamic import trùng static import không ảnh hưởng kết quả build |
-| Node production artifact | **PASS Node 24.21.0**, Vercel API entry → Vite artifact → Express HTTP; Helmet/CORS/JSON error/auth guard |
+| Node production artifact | **PASS Node 24.21.0**, Express app → HTTP; Helmet/CORS/JSON error/auth guard |
 | Migration check | PASS; tất cả DDL áp dụng thành công trên cluster tạm |
 | Frozen install | PASS từ cache theo root lock |
 | Cloud audit | Chỉ READ ONLY; không migration hoặc giao dịch thật |
