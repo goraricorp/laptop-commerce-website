@@ -1,0 +1,110 @@
+/*.gradient-button {*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    box-sizing: border-box;*/
+/*    outline: none;*/
+/*    border: none;*/
+/*    margin: 0;*/
+/*    cursor: pointer;*/
+/*    vertical-align: middle;*/
+/*    text-decoration: none;*/
+/*    line-height: 1.2;*/
+/*    font-size: 0.9375rem;*/
+/*    letter-spacing: 0.43px;*/
+/*    font-weight: 500;*/
+/*    border-radius: 6px;*/
+/*    color: hsla(0, 0%, 100%, 0.9);*/
+/*    min-width: 50px;*/
+/*    text-transform: none;*/
+/*    padding: 0.625rem 1.25rem;*/
+/*    background: linear-gradient(-45deg, #ffa63d, #ff3d77, #338aff, #3cf0c5);*/
+/*    background-size: 600%;*/
+/*    animation: gradient 12s ease infinite;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);*/
+/*    transition: box-shadow 0.3s ease; !* chuyển đổi mượt khi thay đổi bóng *!*/
+/*}*/
+
+/*.gradient-button:hover {*/
+/*    box-shadow: none;*/
+/*}*/
+
+/*!* Định nghĩa keyframes cho hiệu ứng gradient *!*/
+/*@keyframes gradient {*/
+/*    0% {*/
+/*        background-position: 0% 50%;*/
+/*    }*/
+/*    50% {*/
+/*        background-position: 100% 50%;*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 0% 50%;*/
+/*    }*/
+/*}*/
+
+.gradient-button {
+    position: relative; /* cần để pseudo-element định vị chính xác */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    text-decoration: none;
+    line-height: 1.2;
+    font-size: 0.9375rem;
+    letter-spacing: 0.43px;
+    font-weight: 500;
+    border-radius: 6px;
+    color: hsla(0, 0%, 100%, 0.9);
+    min-width: 50px;
+    text-transform: none;
+    padding: 0.625rem 1.25rem;
+    background: linear-gradient(-45deg, #ffa63d, #ff3d77, #338aff, #3cf0c5);
+    /*background: linear-gradient(-45deg, #e7e7ff, #e8fadf, #d7f5fc, #fff2d6, #ffe0db);*/
+    /*background: linear-gradient(-45deg, #696cff, #eb3d63, #2092ec, #ffab1d, #0d9394);*/
+    background-size: 600%;
+    animation: gradient 12s ease infinite;
+    z-index: 1;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Pseudo-element để tạo hiệu ứng bóng gradient */
+.gradient-button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(-45deg, #ffa63d, #ff3d77, #338aff, #3cf0c5);
+    /*background: linear-gradient(-45deg, #696cff, #eb3d63, #2092ec, #ffab1d, #0d9394);*/
+    background-size: 600%;
+    border-radius: inherit;
+    filter: blur(6px);
+    opacity: 0.75;
+    z-index: -1;
+    animation: gradient 12s ease infinite;
+    transition: opacity 0.3s ease;
+}
+
+/* Khi hover, ẩn dần hiệu ứng bóng */
+.gradient-button:hover::before {
+    opacity: 0;
+}
+
+/* Định nghĩa keyframes cho hiệu ứng gradient */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "provider": "momo",
+    "success": true,
+    "responseKeys": [
+      "providerId",
+      "url"
+    ],
+    "redirectHost": "test-payment.momo.vn",
+    "currency": "VND",
+    "amount": "50000.00",
+    "unpaidState": "pending"
+  },
+  {
+    "provider": "zalopay",
+    "success": true,
+    "responseKeys": [
+      "providerId",
+      "url"
+    ],
+    "redirectHost": "qcgateway.zalopay.vn",
+    "currency": "VND",
+    "amount": "50000.00",
+    "unpaidState": "pending"
+  },
+  {
+    "provider": "paypal",
+    "success": true,
+    "responseKeys": [
+      "providerId",
+      "url"
+    ],
+    "redirectHost": "www.sandbox.paypal.com",
+    "currency": "USD",
+    "amount": "2.00",
+    "unpaidState": "pending"
+  },
+  {
+    "provider": "stripe",
+    "success": true,
+    "responseKeys": [
+      "providerId",
+      "url"
+    ],
+    "redirectHost": "checkout.stripe.com",
+    "currency": "VND",
+    "amount": "50000.00",
+    "unpaidState": "pending"
+  }
+]

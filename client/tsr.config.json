@@ -1,0 +1,7 @@
+{
+  "routesDirectory": "./src/routes",
+  "generatedRouteTree": "./src/routeTree.gen.js",
+  "disableTypes": true,
+  "quoteStyle": "single",
+  "semicolons": false
+}

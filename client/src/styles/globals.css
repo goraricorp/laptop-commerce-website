@@ -1,0 +1,473 @@
+@import "tailwindcss" source("../");
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+@source "../**/*.{ts,tsx}";
+
+@theme inline {
+  --font-heading: var(--app-font-family);
+  --font-sans: var(--app-font-family);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-professional-main: var(--professional-main);
+  --color-professional-sub: var(--professional-sub);
+
+  --color-professional-primary-1: var(--professional-primary-1);
+  --color-professional-primary-2: var(--professional-primary-2);
+  --color-professional-primary-3: var(--professional-primary-3);
+  --color-professional-primary-4: var(--professional-primary-4);
+  --color-professional-primary-5: var(--professional-primary-5);
+
+  --color-professional-primary-alt-1: var(--professional-primary-alt-1);
+  --color-professional-primary-alt-2: var(--professional-primary-alt-2);
+  --color-professional-primary-alt-3: var(--professional-primary-alt-3);
+  --color-professional-primary-alt-4: var(--professional-primary-alt-4);
+  --color-professional-primary-alt-5: var(--professional-primary-alt-5);
+
+  --color-professional-secondary: var(--professional-secondary);
+  --color-professional-success: var(--professional-success);
+  --color-professional-info: var(--professional-info);
+  --color-professional-warning: var(--professional-warning);
+  --color-professional-danger: var(--professional-danger);
+
+  --color-professional-light: var(--professional-light);
+  --color-professional-dark: var(--professional-dark);
+  --color-professional-gray: var(--professional-gray);
+
+  --color-professional-blue: var(--professional-blue);
+  --color-professional-indigo: var(--professional-indigo);
+  --color-professional-purple: var(--professional-purple);
+  --color-professional-pink: var(--professional-pink);
+  --color-professional-red: var(--professional-red);
+  --color-professional-orange: var(--professional-orange);
+  --color-professional-yellow: var(--professional-yellow);
+  --color-professional-green: var(--professional-green);
+  --color-professional-teal: var(--professional-teal);
+  --color-professional-cyan: var(--professional-cyan);
+  --color-professional-black: var(--professional-black);
+  --color-professional-white: var(--professional-white);
+  --color-professional-gray: var(--professional-gray);
+  --color-professional-gray-dark: var(--professional-gray-dark);
+
+  --color-base: var(--base);
+  --color-paint: var(--paint);
+  --color-chart: var(--chart);
+}
+
+:root {
+  --app-font-family:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  --professional-main: #ec6683;
+  --professional-sub: #e091a0;
+
+  --professional-primary-1: #696cff;
+  --professional-primary-2: #0d9394;
+  --professional-primary-3: #ffab1d;
+  --professional-primary-4: #eb3d63;
+  --professional-primary-5: #2092ec;
+
+  --professional-primary-alt-1: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-primary-1)
+  );
+  --professional-primary-alt-2: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-primary-2)
+  );
+  --professional-primary-alt-3: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-primary-3)
+  );
+  --professional-primary-alt-4: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-primary-4)
+  );
+  --professional-primary-alt-5: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-primary-5)
+  );
+
+  --professional-secondary: #8592a3;
+  --professional-success: #71dd37;
+  --professional-info: #03c3ec;
+  --professional-warning: #ffab00;
+  --professional-danger: #ff3e1d;
+
+  --professional-light: #dbdee0;
+  --professional-dark: #2b2c40;
+  --professional-gray: #91979f;
+  --professional-paper: #ffffff;
+
+  --professional-secondary-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-success-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-info-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-warning-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-danger-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-light-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-dark-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-gray-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+
+  --professional-blue: #007bff;
+  --professional-indigo: #6610f2;
+  --professional-purple: #696cff;
+  --professional-pink: #e83e8c;
+  --professional-red: #ff3e1d;
+  --professional-orange: #fd7e14;
+  --professional-yellow: #ffab00;
+  --professional-green: #71dd37;
+  --professional-teal: #20c997;
+  --professional-cyan: #03c3ec;
+  --professional-black: #22303e;
+  --professional-white: #ffffff;
+  --professional-gray: #7a838b;
+  --professional-gray-dark: #4e5965;
+
+  --base: oklch(0.556 0 0);
+  --paint: #737373;
+  --chart: oklch(0.556 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+
+  --professional-main: #ec6683;
+  --professional-sub: #f4b2bd;
+
+  --professional-primary-1: #696cff;
+  --professional-primary-2: #0d9394;
+  --professional-primary-3: #ffab1d;
+  --professional-primary-4: #eb3d63;
+  --professional-primary-5: #2092ec;
+
+  --professional-primary-alt-1: color-mix(
+    in sRGB,
+    var(--professional-dark) 84%,
+    var(--professional-primary-1)
+  );
+  --professional-primary-alt-2: color-mix(
+    in sRGB,
+    var(--professional-dark) 84%,
+    var(--professional-primary-2)
+  );
+  --professional-primary-alt-3: color-mix(
+    in sRGB,
+    var(--professional-dark) 84%,
+    var(--professional-primary-3)
+  );
+  --professional-primary-alt-4: color-mix(
+    in sRGB,
+    var(--professional-dark) 84%,
+    var(--professional-primary-4)
+  );
+  --professional-primary-alt-5: color-mix(
+    in sRGB,
+    var(--professional-dark) 84%,
+    var(--professional-primary-5)
+  );
+
+  --professional-secondary: #8592a3;
+  --professional-success: #71dd37;
+  --professional-info: #03c3ec;
+  --professional-warning: #ffab00;
+  --professional-danger: #ff3e1d;
+
+  --professional-light: #494a5d;
+  --professional-dark: #6b6c9d;
+  --professional-gray: #8f90a5;
+  --professional-paper: #2b2c40;
+
+  --professional-secondary-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-success-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-info-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-warning-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-danger-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-light-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-dark-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+  --professional-gray-alt: color-mix(
+    in sRGB,
+    var(--professional-paper) 84%,
+    var(--professional-secondary)
+  );
+
+  --professional-blue: #007bff;
+  --professional-indigo: #6610f2;
+  --professional-purple: #696cff;
+  --professional-pink: #e83e8c;
+  --professional-red: #ff3e1d;
+  --professional-orange: #fd7e14;
+  --professional-yellow: #ffab00;
+  --professional-green: #71dd37;
+  --professional-teal: #20c997;
+  --professional-cyan: #03c3ec;
+  --professional-black: #22303e;
+  --professional-white: #ffffff;
+  --professional-gray: #7a838b;
+  --professional-gray-dark: #4e5965;
+
+  --base: oklch(0.556 0 0);
+  --paint: #737373;
+  --chart: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+    font-family: var(--app-font-family);
+  }
+}
+
+html.font-inter {
+  --app-font-family:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html.font-geist {
+  --app-font-family:
+    "Geist Variable", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html.font-system {
+  --app-font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* Config drawer color mapping. Keep this block last so it only extends the existing theme. */
+:root {
+  --theme-current-primary: oklch(0.205 0 0);
+  --theme-current-primary-foreground: oklch(0.985 0 0);
+}
+
+.dark {
+  --theme-current-primary: oklch(0.922 0 0);
+  --theme-current-primary-foreground: oklch(0.205 0 0);
+}
+
+:root[data-color="primary"] {
+  --theme-selected-primary: var(--theme-current-primary);
+  --theme-selected-primary-foreground: var(--theme-current-primary-foreground);
+}
+
+:root[data-color="main"] {
+  --theme-selected-primary: var(--professional-main);
+}
+:root[data-color="primary-1"] {
+  --theme-selected-primary: var(--professional-primary-1);
+}
+:root[data-color="primary-2"] {
+  --theme-selected-primary: var(--professional-primary-2);
+}
+:root[data-color="primary-3"] {
+  --theme-selected-primary: var(--professional-primary-3);
+}
+:root[data-color="primary-4"] {
+  --theme-selected-primary: var(--professional-primary-4);
+}
+:root[data-color="primary-5"] {
+  --theme-selected-primary: var(--professional-primary-5);
+}
+
+:root[data-color]:not([data-color="primary"]) {
+  --theme-selected-primary-foreground: #ffffff;
+}
+
+:root[data-color] {
+  --primary: var(--theme-selected-primary);
+  --primary-foreground: var(--theme-selected-primary-foreground);
+  --ring: var(--theme-selected-primary);
+  --sidebar-primary: var(--theme-selected-primary);
+  --sidebar-primary-foreground: var(--theme-selected-primary-foreground);
+  --chart-1: var(--theme-selected-primary);
+}
+
+/* BProgress follows the active application color in every theme. */
+:root {
+  --bprogress-color: var(--primary);
+  --bprogress-height: 2px;
+  --bprogress-box-shadow: 0 0 8px
+    color-mix(in oklab, var(--primary) 70%, transparent);
+}
+
+.bprogress .bar,
+.bprogress .indeterminate {
+  height: 2px;
+}

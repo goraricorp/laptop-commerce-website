@@ -69,25 +69,9 @@ Color {
     #696cff, #0d9394, #ffab1d, #eb3d63, #2092ec
 }
 
-.env client {
-REACT_APP_GOOGLE_OAUTH_CLIENT_ID="293479668173-jnahitc17msp2gal1f7abdoia4agkogo.apps.googleusercontent.com"
-STICKY_NOTES_API_URL="6LfaA50qAAAAAGbL3FubZuwBEaLuDMAfEPjN48lX"
-VITE_SERVER_URL="http://localhost:5172"
-}
+sửa toàn bộ các file trong layouts, components sử dụng kebab-case, loại bỏ hoàn toàn các css module cũ và bootstrap, react-bootstrap thay bằng tailwind, shadcn, 
+hiện tại có rất nhiều page đang sử dụng css module và bootstrap, react-bootstrap  cũng sửa sử dụng kebab-case, tailwind, shadcn, 
 
-.env server {
-METHOD="http"
-HOST="localhost"
-PORT=5172
-SERVER_URL="http://localhost:5172"
-CLIENT_URL="http://localhost:5173"
-MOBILE_URL="http://localhost:8081"
-DATABASE="es_proj"
-SQL_USERNAME="root"
-SQL_PASSWORD="Japtor@1999"
-EMAIL_USER="uipackgorth@gmail.com"
-EMAIL_APSS="vprj acmu qtgb qwny"
-EMAIL_PASS="Gorth$1999"
-JWT_SECRET="gorth"
-SecretKey="6LfaA50qAAAAAM1aoWsGwTTm9_HNinFwcSs_q_am"
-}
+các page sử dụng export default function NameOfPage()
+các file layout sử dụng export default function NameOfLayout()
+các module khác như components, hooks, providers, schemas, services, lib, ... tuyệt đối ko export default, chỉ export function, chỉ các pages và layouts mới udngf export default

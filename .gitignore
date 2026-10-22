@@ -8,6 +8,7 @@
 *.sln
 *.sw?
 .DS_Store
+.pnpm*
 
 # Node.js specific files and folders
 node_modules/
@@ -22,7 +23,7 @@ dist/
 dist-ssr/
 *.local
 *.env
-/client/.env
+/client/.env.local
 /server/.env
 /mobile/.env
 
@@ -31,16 +32,11 @@ logs/
 *.log
 
 # Folders for each part of the project
-/client/node_modules/
-/server/node_modules/
-/customer/node_modules/
-/mobile/node_modules/
+**/node_modules/
 
 # OS-specific files
 #.DS_Store
-/client/.DS_Store
-/server/.DS_Store
-/mobile/.DS_Store
+**/.DS_Store
 
 # Ignore VSCode workspace files except extensions.json
 .vscode/*
@@ -48,8 +44,8 @@ logs/
 
 #
 
-**/.DS_Store
-**/.env
+.env.local
+!**/.env.example
 **/.env.local
 **/.env.development
 **/.env.production

@@ -1,0 +1,27 @@
+{
+  "name": "@gorth/laptop-commerce-website",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "deno@2.9.7",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "deno task build",
+    "lint": "deno task lint",
+    "test": "deno task test",
+    "test:integration": "deno task test:integration",
+    "test:e2e": "deno task test:e2e",
+    "check": "deno task check",
+    "audit:phase5": "deno task --cwd server audit:phase5",
+    "dev:client": "deno task dev:client",
+    "dev:server": "deno task dev:server",
+    "build:client": "deno task build:client",
+    "build:server": "deno task build:server",
+    "test:client": "deno task test:client",
+    "test:server": "deno task test:server",
+    "lint:client": "deno task lint:client",
+    "lint:server": "deno task lint:server",
+    "audit:phase6": "deno task --cwd server audit:phase6"
+  }
+}

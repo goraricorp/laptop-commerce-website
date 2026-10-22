@@ -1,0 +1,70 @@
+[
+  {
+    "controller": "momoPayment",
+    "httpStatus": 200,
+    "responseKeys": [
+      "partnerCode",
+      "orderId",
+      "requestId",
+      "amount",
+      "responseTime",
+      "resultCode",
+      "message",
+      "payUrl",
+      "shortLink"
+    ],
+    "providerCode": 0,
+    "providerStatus": null,
+    "providerMessage": "Thành công.",
+    "hasRedirect": true,
+    "hasStripeClientSecret": false
+  },
+  {
+    "controller": "zalopayPayment",
+    "httpStatus": 200,
+    "responseKeys": [
+      "return_code",
+      "return_message",
+      "sub_return_code",
+      "sub_return_message",
+      "zp_trans_token",
+      "order_url",
+      "order_token"
+    ],
+    "providerCode": 1,
+    "providerStatus": null,
+    "providerMessage": "Giao dịch thành công",
+    "hasRedirect": true,
+    "hasStripeClientSecret": false
+  },
+  {
+    "controller": "paypalCreateOrder",
+    "httpStatus": 200,
+    "responseKeys": [
+      "success",
+      "orderId",
+      "status",
+      "approvalUrl"
+    ],
+    "providerCode": null,
+    "providerStatus": "PAYER_ACTION_REQUIRED",
+    "providerMessage": null,
+    "hasRedirect": true,
+    "hasStripeClientSecret": false
+  },
+  {
+    "controller": "stripePayment",
+    "httpStatus": 200,
+    "responseKeys": [
+      "paymentIntent",
+      "customerSessionClientSecret",
+      "customer",
+      "publishableKey"
+    ],
+    "providerCode": null,
+    "providerStatus": null,
+    "providerMessage": null,
+    "hasRedirect": false,
+    "hasStripeClientSecret": true
+  }
+]

@@ -1,0 +1,1 @@
+ALTER TABLE "upload_asset" ADD COLUMN "purpose" varchar(20) DEFAULT 'general' NOT NULL;
