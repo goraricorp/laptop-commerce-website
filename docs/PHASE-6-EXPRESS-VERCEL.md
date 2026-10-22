@@ -48,11 +48,11 @@ Có thể chạy trực tiếp `bun run dev` trong từng thư mục client/serv
 | Runtime | static SPA | Node 24.x |
 | Install | `bun install --frozen-lockfile` | `npx --yes bun@1.4.3 install --frozen-lockfile` |
 | Build | `bun run build` trong client | `bun run build` trong server, Vite SSR target node24 |
-| Entrypoint | dist/index.html | `src/index.js` export Express app cho Vercel Express preset |
+| Entrypoint | dist/index.html | `package.json` trỏ `main` tới Vite bundle `dist/index.js` |
 | Routing | SPA fallback; API origin cấu hình qua `VITE_PUBLIC_SERVER_URL` | Express nhận nguyên path như `/health`, `/auth`, `/product`, `/cart` |
-| Function | — | `src/index.js`, maxDuration 60 giây |
+| Function | — | Vercel Express đọc entrypoint từ package; artifact giữ nguyên Express app và route |
 
-Vercel dùng preset Express để đưa `server/src/index.js` thành một Function duy nhất, giữ nguyên URL route Express. Vite build vẫn chạy để kiểm tra artifact server trong pipeline. `bun run test:built` smoke-test Express app trực tiếp bằng Node. Khóa Bun dùng định dạng v2 nên lệnh cài đặt phải chạy Bun 1.4.3; Bun 1.3.x sẽ bỏ qua lockfile này.
+Vite build `server/src/index.js` thành `server/dist/index.js`; `ssr.noExternal: true` bundle cả dependency runtime vào artifact thay vì để Vercel lần theo các package con như `htmlparser2`. `server/package.json` khai báo artifact qua `main`, theo cùng cách deploy của bản vite-stack tham chiếu. Express tiếp tục xử lý các URL route hiện tại. `bun run test:built` smoke-test artifact đã build trực tiếp bằng Node. Khóa Bun dùng định dạng v2 nên lệnh cài đặt phải chạy Bun 1.4.3; Bun 1.3.x sẽ bỏ qua lockfile này.
 
 Frontend cấu hình `VITE_PUBLIC_SERVER_URL` thành origin HTTPS của project backend. Client gọi trực tiếp server; `client/vercel.mjs` chỉ cấu hình SPA fallback. Domain hiện định cấu hình là `https://example-client.vercel.app` và `https://example-server.vercel.app`; đặt cả `VITE_PUBLIC_CLIENT_URL` và `VITE_PUBLIC_SERVER_URL` trong env của cả hai project. Đây là hai site khác nhau: cookie `SameSite=None; Secure` cho phép credentialed requests ở trình duyệt chấp nhận third-party cookies, nhưng Safari ITP và chính sách chặn third-party cookie có thể vẫn ngăn auth. Hỗ trợ đầy đủ các trình duyệt đó cần hai custom domain cùng site. [Vercel hỗ trợ cấu hình programmatic `.mjs`](https://vercel.com/docs/project-configuration/vercel-ts). Cho hai project truy cập workspace files bên ngoài Root Directory để đọc root deno.lock/node_modules. Không đổi root outputDirectory backend thành frontend dist.
 

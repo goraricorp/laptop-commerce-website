@@ -7,8 +7,7 @@ export default defineConfig({
     strictPort: true
   },
   ssr: {
-    noExternal: ["sanitize-html"],
-    optimizeDeps: { include: ["sanitize-html"] },
+    noExternal: true,
   },
   plugins: [
     {
