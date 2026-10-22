@@ -35,7 +35,7 @@ The fake /demo endpoints are no longer mounted. Legacy files remain present.
 No deployment has been performed by this change.
 
 1. Import the repository twice, using Root Directory client and server respectively. Include files outside Root Directory so root deno.json/deno.lock are available.
-2. Backend: select Hono and Node 24. server/vercel.json bootstraps the pinned Deno CLI using npx, installs the workspace with its frozen lock and runs the backend build. It does not need Deno as a production runtime.
+2. Backend: select Hono and Node 24. server/vercel.mjs bootstraps the pinned Deno CLI using npx, installs the workspace with its frozen lock and runs the backend build. It does not need Deno as a production runtime.
 3. Frontend: select Vite. client/vercel.mjs requires API_PROXY_ORIGIN to be the backend HTTPS origin without credentials, path or query. It creates the /api rewrite before the SPA fallback. Missing/invalid configuration fails explicitly. The build image uses pinned Deno bootstrap; no global Deno installation is assumed.
 4. Backend environment: VITE_PUBLIC_CLIENT_URL=https://frontend.example; VITE_PUBLIC_SERVER_URL=https://frontend.example/api (for public asset URLs); BETTER_AUTH_URL=https://frontend.example/api/auth. Keep BETTER_AUTH_SECRET unchanged to preserve sessions. Configure database, bucket, SMTP and payment secrets on the backend only.
 5. Better Auth still exposes backend /auth/*. The Hono adapter restores the configured public auth pathname after /api is stripped by the proxy. Callback/reset/verification URLs use the public auth URL. Do not forward arbitrary request hosts into authentication configuration.

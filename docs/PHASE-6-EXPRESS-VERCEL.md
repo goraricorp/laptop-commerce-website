@@ -35,7 +35,7 @@ Middleware và API dùng [Express 5](https://expressjs.com/en/guide/migrating-5/
 
 Từ root dùng `deno task dev:server` và `deno task dev:client` trong hai terminal. Có build/test/lint riêng cho từng app; root build/test/lint/check chỉ là các helper chạy tuần tự. Không có task dev khởi động cả hai cùng lúc, không có Turbo.
 
-Có thể chạy trực tiếp `deno run dev` trong từng thư mục client/server. Script dev server chỉ là `vite --port 5172`; Vite mount Express trên 127.0.0.1:5172 bằng plugin trong `server/vite.config.js`, không có listener dev riêng. Plugin dùng `ssrLoadModule` để nạp lại source khi sửa và prebundle sanitize-html để tương thích CommonJS/ESM trên Deno. `deno task --cwd server preview` chạy artifact `dist/index.js`; cần build server trước.
+Có thể chạy trực tiếp `bun run dev` trong từng thư mục client/server. Script dev server chỉ là `vite --port 5172`; Vite mount Express trên 127.0.0.1:5172 bằng plugin trong `server/vite.config.mjs`, không có listener dev riêng. Plugin dùng `ssrLoadModule` để nạp lại source khi sửa. `bun run preview` trong server chạy artifact `dist/index.js`; cần build server trước.
 
 `deno install --frozen --cached-only ...` đã qua tại workspace hiện tại. CI/Vercel bỏ cached-only để tải package theo lock. Deno compatibility runtime báo Node 26 cho engines check; artifact production đã được thử bằng Node **24.21.0** thật, không kết luận chỉ từ Deno.
 

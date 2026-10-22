@@ -1,5 +1,5 @@
 export const config = {
-  installCommand: "bun install --frozen-lockfile",
+  installCommand: "bun install",
   buildCommand: "bun run build",
   outputDirectory: "dist",
   rewrites: [

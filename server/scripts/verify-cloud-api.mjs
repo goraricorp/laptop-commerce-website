@@ -7,7 +7,7 @@ if (!process.argv.includes("--read-only"))
 // Every pg connection opened by this isolated process must reject SQL writes.
 process.env.PGOPTIONS = `${process.env.PGOPTIONS ?? ""} -c default_transaction_read_only=on`;
 const server = await createServer({
-  configFile: "./vite.config.js",
+  configFile: "./vite.config.mjs",
   server: { host: "127.0.0.1", port: 0, open: false },
   logLevel: "error",
 });

@@ -89,7 +89,7 @@ Audit cloud **READ ONLY** trong đợt này: transaction_read_only=on, 0 multipl
 
 - `INTERNAL_JOB_SECRET`: secret server-only tối thiểu 32 ký tự ngẫu nhiên, lưu cùng giá trị trong secret store của scheduler; không VITE_*, không URL query, không commit giá trị thật.
 - Scheduler HTTPS ngoài: POST backend `/internal/jobs/dispatch` và `/internal/jobs/checkout` mỗi phút; POST `/internal/jobs/images` hàng giờ. Header `Authorization: Bearer <secret>`, body `{}`, timeout khoảng 60 giây. Có thể retry cùng job; lease/claim/idempotency xử lý trùng. Job đang chạy/chưa đến giờ trả skipped; lỗi job trả 503 để scheduler nhận biết.
-- `server/vercel.json` đặt maxDuration=60 cho src/index.js; batch dùng deadline 45 giây, không tạo timer trong startup. Cần xác nhận cấu hình thực được áp dụng khi deploy. [Cấu hình duration](https://vercel.com/docs/functions/configuring-functions/duration).
+- `server/vercel.mjs` đặt maxDuration=60 cho src/index.js; batch dùng deadline 45 giây, không tạo timer trong startup. Cần xác nhận cấu hình thực được áp dụng khi deploy. [Cấu hình duration](https://vercel.com/docs/functions/configuring-functions/duration).
 - Giữ merchant env hiện có, cấu hình thêm PAYPAL_WEBHOOK_ID nếu dùng webhook PayPal; đăng ký URL webhook HTTPS đúng môi trường. SMTP giữ EMAIL_USER/EMAIL_APSS/EMAIL_FROM; transport có timeout và thư giao dịch đi qua outbox.
 - Thanh toán paid_late giữ nguyên dấu lịch sử, nhưng bỏ yêu cầu hỗ trợ/metadata requiresRefund sau khi hồ sơ hủy có hoàn tiền đã thành công.
 - Admin → Đơn hàng: dashboard quan sát backlog/lỗi/lần chạy, paid_late và hồ sơ mở; Xem đơn → Vận chuyển/trả hàng/hoàn tiền để xử lý. Chủ đơn mở chi tiết đơn ở `/purchase?orderId=...` để gửi/đọc hồ sơ.
